@@ -1,10 +1,12 @@
-= IBM Tivoli Directory Integrator 7.1.1 Docker Container =
+IBM Tivoli Directory Integrator 7.1.1 Docker Container
+===========================
 
 Suse 11.4 running IBM's TDI 7.1.1 also known as IBM Security Directory Integrator.
 Runs the TDI Configuration Editor GUI when the container is started.
 The build does not include TDI itself, which you must download from the IBM's software access catalog website.
 
-== Building ==
+Building
+--------
 This container is built from the scratcch, meaning that you need the OS first.
 
 You can create Just enough OS image with SUSE Studio (https://susestudio.com), or do it using the included kiwi script. 'jeos-config.xml' contains JeOS configuration details.
@@ -15,7 +17,8 @@ Download TDI 7.1.1 for Linux from IBM's Software access catalog. Save it to TDI_
 Download TDI 7.1.1 Fix Pack 5 from IBM's support site and save it to '7.1.1-TIV-TDI-FP0005.zip'
 Now run 'build'
 
-=== JeOS ===
+JeOS
+---------
 If you are building your own "just enough os" note of the serveral packages are required:
 * gawk, tar, libgtk-2_0-0 - to install and run TDI
 * fastjar for jarring TDI adapters
@@ -34,7 +37,8 @@ RUN zypper clean --all
 
 and possibly other packages
 
-== Running ==
+Running
+-----------
 Use the bundled 'run' command or
  docker run -ti --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro -v ~/Shared\ Folder/Docker:/opt/IBM/TDI/V7.1.1/workspace -u 1000 aiv/tdi711
 
