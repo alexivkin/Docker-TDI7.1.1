@@ -1,8 +1,8 @@
 IBM Tivoli Directory Integrator 7.1.1 Docker Container
 ======================================================
 
-Suse 11.4 running IBM's TDI 7.1.1 also known as IBM Security Directory Integrator.
-Runs the TDI Configuration Editor GUI when the container is started.
+SUSE Linux Enterprise Server 11.4 running IBM TDI 7.1.1 also known as IBM Security Directory Integrator.
+TDI Configuration Editor GUI is started when the container is run.
 The build does not include TDI itself, which you must download from the IBM's software access catalog website.
 
 Building
