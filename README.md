@@ -7,25 +7,25 @@ The build does not include TDI itself, which you must download from the IBM's so
 
 Building
 --------
-This container is built from the scratcch, meaning that you need the OS first.
+This container is built from the scratch, meaning that you need the OS first.
 
-You can create Just enough OS image with SUSE Studio [https://susestudio.com], or do it using the included kiwi script. `jeos-config.xml` contains JeOS configuration details.
+1. You can create Just enough OS image with [SUSE Studio](https://susestudio.com), or do it using the included kiwi script. `jeos-config.xml` file contains the JeOS configuration details.
 
-Once you have the image convert it to a "file and folder" tgz by running `sles2docker`
+2. Once you have downloaded or created the JeOS disk image you need to convert it to a "file and folder" archive by running `sles2docker`
 
-Download TDI 7.1.1 for Linux from IBM's Software access catalog. Save it to TDI_IDENTITY_E_V7.1.1_LIN-X86-64(CZUF3ML).tar
-Download TDI 7.1.1 Fix Pack 5 from IBM's support site and save it to '7.1.1-TIV-TDI-FP0005.zip'
-Now run 'build'
+3. Download TDI 7.1.1 for Linux from IBM's Software access catalog. Save it to `TDI_IDENTITY_E_V7.1.1_LIN-X86-64(CZUF3ML).tar`
+4. Download TDI 7.1.1 Fix Pack 5 from IBM's support site and save it to `7.1.1-TIV-TDI-FP0005.zip`
+5. Now run `./build`
 
 JeOS
 ----
-If you are building your own "just enough os" note of the serveral packages are required:
+If you are building your own JeOS note of the several packages are required:
 * gawk, tar, libgtk-2_0-0 - to install and run TDI
 * fastjar for jarring TDI adapters
 * unzip for unzipping install media
 
 Optional:
-* vim for general editing/testing stuff from within a runing contianer
+* vim for general editing/testing stuff from within a running container
 
 The size of the appliance could potentially be reduced by removing unneeded packages like this:
 ```
@@ -42,10 +42,10 @@ Running
 -------
 Use the bundled 'run' command or
 
-`docker run -ti --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro -v ~/Shared\ Folder/Docker:/opt/IBM/TDI/V7.1.1/workspace -u 1000 aiv/tdi711`
+    docker run -ti --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro -v ~/Shared\ Folder/Docker:/opt/IBM/TDI/V7.1.1/workspace -u 1000 aiv/tdi711`
 
 When TDI starts it will prompt for the workplace location, just ok it.
-TDI GUI is running nativelly via a shared X socket, no ssh is needed [http://stackoverflow.com/questions/25281992/alternatives-to-ssh-x11-forwarding-for-docker-containers/25334301#25334301].
+TDI GUI is running nativelly via a shared X socket, [no ssh is needed] (http://stackoverflow.com/questions/25281992/alternatives-to-ssh-x11-forwarding-for-docker-containers/25334301#25334301).
 
 The container is running under user developer that mimics your ID and group so that the shared volumes have the same permission structure
 
@@ -53,9 +53,9 @@ root password is Passw0rd, and so is the developer's password.
 
 When ibmditk starts it creates the folder structure under /home/developer. To add server SSL certificates edit /home/developer/serverapi/testadmin.jsk keysotore. You can run java tools by adding them to the path
 
-`export PATH=$PATH:/opt/IBM/TDI/V7.1.1/jvm/jre/bin/`
+    export PATH=$PATH:/opt/IBM/TDI/V7.1.1/jvm/jre/bin/
 
-To add packages use susestudio to create a proper pacakge or add a OpenSUSE repos and update it from within the container. Note though that several opensuse updates break TDI.
+To add packages use susestudio to create a proper package or add a OpenSUSE repos and update it from within the container. Note though that several opensuse updates break TDI.
 
 ```
 RUN zypper ar http://download.opensuse.org/update/11.4/ Update
