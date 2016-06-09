@@ -7,15 +7,13 @@ The build does not include TDI itself, which you must download from the IBM's so
 
 Building
 --------
-This container is built from the scratch, meaning that you need the OS first.
+This container is built from the scratch, meaning that you need the OS first. You also need TDI and TDI FP5 installation packages. Docker Hub automated builds will not work for you because these packages are not included in the Docker distribution.
 
 1. You can create Just enough OS image with [SUSE Studio](https://susestudio.com), or do it using the included kiwi script. `jeos-config.xml` file contains the JeOS configuration details. (list of needed packages is in the JeOS section below)
 2. Once you have downloaded or created the JeOS disk image you need to convert it to a "file and folder" archive by running `sles2docker`
 3. Download TDI 7.1.1 for Linux from IBM's Software access catalog. Save it to `TDI_IDENTITY_E_V7.1.1_LIN-X86-64(CZUF3ML).tar`
 4. Download TDI 7.1.1 Fix Pack 5 from IBM's support site and save it to `7.1.1-TIV-TDI-FP0005.zip`
 5. Now run `./build`
-
-Docker Hub automated builds will not work for you because you need the OS package, the TDI and TD FP5 (the latter two can not be shared).
 
 JeOS
 ----
