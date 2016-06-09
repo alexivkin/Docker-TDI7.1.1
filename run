@@ -1,0 +1,21 @@
+#!/bin/bash
+
+cid=alexivkin/tdi711
+
+# todo instead of using a ephimeral container (--rm), use a persistent container by running docker create if a container is present, and then, when container exists, do docker start and docker attach
+# use option "new" to kill and re-create the container
+opt=(--rm --net=host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro  -v $HOME/Shared\ Folder/Docker:/home/developer/workspace) # using array because a space inside args is different from a space separating the args
+# remove --net=host if you want NAT network
+
+# Use local X server - allow local X connection from the docker instance
+if [[ -z "$(xhost|grep LOCAL)" ]]; then
+	xhost +local:$(docker inspect --format='{{ .Config.Hostname }}' $cid)
+fi
+
+# if there are options specified then run container in an interactive shell, otherwise not
+if [[ $# > 0 ]]; then
+	opt+=(-ti)
+	docker run "${opt[@]}" $cid $*
+else
+	docker run "${opt[@]}" $cid &
+fi

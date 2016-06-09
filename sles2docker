@@ -1,0 +1,19 @@
+#!/bin/bash
+# convert  images created bu the suse studio (susestudio.com) to an archive usable by docker
+if [ $# -eq 0 ]; then echo "Gimme the archive name"; exit 1; fi
+
+set -e # exit on any failure
+
+mkdir tmp
+# Extract the partition (you could check the start offset of the partition by looking at the output of fdisk -l <your image>.raw)
+echo Unpacking
+tar zxOf $1 | dd bs=512 skip=2048 of=SLES.raw > /dev/null
+echo Re-packing
+sudo mount -t ext3 -o ro,loop SLES.raw tmp # you could also unzip the whole raw disk and mount with -o offset=1048576 option which is 512*2048
+# Repack the partition
+sudo tar czf SLES_11_SP4_JeOS.x86_64.tar.gz -C tmp . # dont foget the trailing dot
+sudo chown $USER:$USER SLES_11_SP4_JeOS.x86_64.tar.gz
+sudo umount tmp
+rmdir tmp
+rm SLES.raw
+echo Done: SLES_11_SP4_JeOS.x86_64.tar.gz

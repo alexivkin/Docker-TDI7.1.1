@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<image name='SLES_11_SP4_JeOS' displayname='SLES_11_SP4_JeOS' schemaversion='5.2'>
+  <description type='system'>
+    <author>Alex Ivkin</author>
+    <contact>studio-devel@suse.de</contact>
+    <specification>Minimal SLES 11 SP4</specification>
+  </description>
+  <preferences>
+    <type checkprebuilt='true' boot='oemboot/suse-SLES11' fsnocheck='true' filesystem='ext3' bootloader='grub' fsmountoptions='acl' image='oem'>
+      <oemconfig>
+        <oem-swap>true</oem-swap>
+        <oem-swapsize>512</oem-swapsize>
+        <oem-boot-title>SLES 11 SP4, JeOS</oem-boot-title>
+      </oemconfig>
+    </type>
+    <version>0.1.3</version>
+    <packagemanager>zypper</packagemanager>
+    <rpm-check-signatures>false</rpm-check-signatures>
+    <rpm-force>false</rpm-force>
+    <boot-theme>studio</boot-theme>
+    <timezone>UTC</timezone>
+    <hwclock>localtime</hwclock>
+  </preferences>
+  <users group='users'>
+    <user name='developer' pwd='$1$W1wRHLc4$kRWe4XLPuc76KVzXGHv.W1' home='/home/developer' shell='/bin/bash' id='1000'/>
+  </users>
+  <users group='root'>
+    <user name='root' pwd='$1$yvdyEdV0$qV6alcf/9KzsQOLwxNRVK/' home='/root' shell='/bin/bash'/>
+  </users>
+  <packages type='image' patternType='onlyRequired'>
+    <package name='iputils'/>
+    <package name='curl'/>
+    <package name='fastjar'/>
+    <package name='gtk2-theme-SLED'/>
+    <package name='vim'/>
+    <package name='unzip'/>
+    <package name='gnome-themes'/>
+    <package name='suse-sam'/>
+    <package name='grub'/>
+    <package name='xorg-x11-fonts'/>
+    <package name='liberation-fonts'/>
+    <package name='xorg-x11-fonts-core'/>
+    <package name='zypper'/>
+    <package name='gtk2'/>
+    <package name='less'/>
+    <package name='timezone'/>
+    <package name='tar'/>
+    <package name='suse-sam-data'/>
+    <package name='kernel-default'/>
+    <archive name='bootsplash.tar' bootinclude='true'/>
+    <package name='gfxboot-devel' bootinclude='true'/>
+  </packages>
+  <packages type='bootstrap'>
+    <package name='filesystem'/>
+    <package name='glibc-locale'/>
+    <package name='module-init-tools'/>
+  </packages>
+  <repository type='yast2'>
+    <source path='{SLE 11 SP4 SDK x86_64}'/>
+  </repository>
+  <repository type='rpm-md'>
+    <source path='{SLE 11 SP4 SDK Updates x86_64}'/>
+  </repository>
+  <repository type='rpm-md'>
+    <source path='{SLES 11 SP4 x86_64}'/>
+  </repository>
+  <repository type='rpm-md'>
+    <source path='{SLES 11 SP4 Updates x86_64}'/>
+  </repository>
+</image>
